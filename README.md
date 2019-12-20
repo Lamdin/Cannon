@@ -1,7 +1,7 @@
 Quintus Engine
 ==============
 
-[![Click here to play cannon](file:///C:/Users/Lamdin/Documents/GitHub/Cannon/examples/cannon/index.html)
+[[!Click here to play cannon](https://i.ytimg.com/vi/NzishIREebw/maxresdefault.jpg)(file:///C:/Users/Lamdin/Documents/GitHub/Cannon/examples/cannon/index.html)
 
 Quintus is an easy-to-learn, fun-to-use HTML5 game engine for mobile, desktop and beyond!
 
