@@ -50,9 +50,13 @@ window.addEventListener('load',function(e) {
     S: 'S'
   };
 
-  if (Q.input.on('action')) {
+  Q.wrapper.addEventListener("keydown", event => {
+    if (Q.input.isComposing || Q.KEY_NAMES === 88) {
+      return;
+    }
     Q.stageScene('level');
-  }; 
+  });
+  
 
   Q.Sprite.extend('CannonBall',{
     init: function(props) {
@@ -76,7 +80,7 @@ window.addEventListener('load',function(e) {
         this.destroy();
       } else if(this.p.seconds < 1) {
         this.set({ "fill-opacity": this.p.seconds });
-      }
+      } 
     }
   });
 
@@ -118,18 +122,11 @@ window.addEventListener('load',function(e) {
       if(sprite instanceof Q.CannonBall) {
         targetCount--;
         this.destroy();
-        if(targetCount == 0) {     
-          var container = Q.stage(new Q.UI.Container({
-          fill: "gray",
-          border: 5,
-          shadow: 10,
-          shadowColor: "rgba(0,0,0,0.5)",
-          y: 50,
-          x: 100
-        })); }
+        if(targetCount == 0) { Q.stageScene('level'); }
+        };
       }
     }
-  });
+  )
 
   Q.scene('level',new Q.Scene(function(stage) {
     targetCount = 0;
