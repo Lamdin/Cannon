@@ -4,9 +4,10 @@ window.addEventListener('load',function(e) {
                      .svgOnly()
                      .setup('quintus',{ maximize: true });
 
-  document.body.style.backgroundColor = 'pink';
+  document.body.style.backgroundColor = 'pink'; //pink background, adjustable with rgb or preset colorsits a 
 
-  var KEY_NAMES = Q.KEY_NAMES = {
+//defining ALL keys, referencable
+  var KEY_NAMES = Q.KEY_NAMES = { 
     LEFT: 37, RIGHT: 39,
     UP: 38, DOWN: 40,
 
@@ -38,6 +39,7 @@ window.addEventListener('load',function(e) {
     PGGUP : 33, PGDOWN : 34
   };
 
+//default Quintus keys, easier way to call these certain keys (probably useless)
   var DEFAULT_KEYS = {
     LEFT: 'left', RIGHT: 'right',
     UP: 'up',     DOWN: 'down',
@@ -49,6 +51,7 @@ window.addEventListener('load',function(e) {
     P: 'P',
     S: 'S'
   };
+
   // Press X to reset the level
   window.addEventListener("keydown",event => {
     if (event.isComposing || event.keyCode == 88 /*88 = the X key*/) {
@@ -177,7 +180,7 @@ window.addEventListener('load',function(e) {
 
     stage.cannon = stage.insert(new Q.Cannon());
     stage.viewport(600,400);
-    stage.centerOn(400,150);
+    stage.centerOn(400,50);
   }));
   	Q.stageScene("level");
   	var cannonMove=function(e) {
