@@ -1,9 +1,8 @@
 window.addEventListener('load',function(e) {
-  var Q = window.Q = Quintus()
-                     .include('Input,Sprites,Scenes,SVG,Physics')
+  var Q = window.Q = Quintus({ development: true })
+                     .include('Input,Sprites,Scenes,SVG,Physics,UI')
                      .svgOnly()
                      .setup('quintus',{ maximize: true });
-
 
   document.body.style.backgroundColor = 'pink';
 
@@ -50,6 +49,10 @@ window.addEventListener('load',function(e) {
     P: 'P',
     S: 'S'
   };
+
+  if (Q.input.on('action')) {
+    Q.stageScene('level');
+  }; 
 
   Q.Sprite.extend('CannonBall',{
     init: function(props) {
@@ -115,7 +118,15 @@ window.addEventListener('load',function(e) {
       if(sprite instanceof Q.CannonBall) {
         targetCount--;
         this.destroy();
-        if(targetCount == 0) { Q.stageScene('level'); }
+        if(targetCount == 0) {     
+          var container = Q.stage(new Q.UI.Container({
+          fill: "gray",
+          border: 5,
+          shadow: 10,
+          shadowColor: "rgba(0,0,0,0.5)",
+          y: 50,
+          x: 100
+        })); }
       }
     }
   });
@@ -136,8 +147,6 @@ window.addEventListener('load',function(e) {
       type:'static',
       shape: 'polygon'
     }));
-
-    if (Q.input.on('action')) { Q.stageScene('level'); }; 
 
 	// Drawing the first target area
     stage.insert(new Q.Sprite({ w: 50, h:50, x: 300, y: 150 }));
