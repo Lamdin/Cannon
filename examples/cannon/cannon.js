@@ -49,14 +49,11 @@ window.addEventListener('load',function(e) {
     P: 'P',
     S: 'S'
   };
-
+  // Press X to reset the level
   window.addEventListener("keydown",event => {
-    if (event.isComposing || event.keyCode == 88) {
+    if (event.isComposing || event.keyCode == 88 /*88 = the X key*/) {
       Q.stageScene('level');
-      this.console.log('it worked');
-    }
-    else {
-      this.console.log('rip lol');
+      this.console.log('Level reset');
     }
   });
   
@@ -86,6 +83,18 @@ window.addEventListener('load',function(e) {
       } 
     }
   });
+  var shotCount = 10;
+
+  window.addEventListener(shotCount, function fire() {
+    if(shotCount < 0) {
+      console.log('out of shots');
+      Q.stageScene('level');
+    }
+    else if(shotCount > 0) {
+      shotCount --;
+      console.log('shot fired');
+    }
+  });
 
   Q.Sprite.extend('Cannon',{
     init: function(props) {
@@ -103,6 +112,7 @@ window.addEventListener('load',function(e) {
       var dx = Math.cos(this.p.angle / 180 * Math.PI),
           dy = Math.sin(this.p.angle / 180 * Math.PI),
           ball = new Q.CannonBall({ dx: dx, dy: dy, angle: this.p.angle });
+      shotCount--;
       Q.stage().insert(ball);
       ball.physics.velocity(dx*475,dy*475);
     }
@@ -132,7 +142,6 @@ window.addEventListener('load',function(e) {
   )
 
   Q.scene('level',new Q.Scene(function(stage) {
-
     targetCount = 0;
     stage.add("world");
     stage.insert(new Q.Sprite({ 
