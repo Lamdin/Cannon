@@ -1,9 +1,8 @@
 window.addEventListener('load',function(e) {
-  var Q = window.Q = Quintus()
-                     .include('Input,Sprites,Scenes,SVG,Physics')
+  var Q = window.Q = Quintus({ development: true })
+                     .include('Input,Sprites,Scenes,SVG,Physics,UI')
                      .svgOnly()
                      .setup('quintus',{ maximize: true });
-
 
   document.body.style.backgroundColor = 'pink';
 
@@ -51,6 +50,17 @@ window.addEventListener('load',function(e) {
     S: 'S'
   };
 
+  window.addEventListener("keydown",event => {
+    if (event.isComposing || event.keyCode == 88) {
+      Q.stageScene('level');
+      this.console.log('it worked');
+    }
+    else {
+      this.console.log('rip lol');
+    }
+  });
+  
+
   Q.Sprite.extend('CannonBall',{
     init: function(props) {
       this._super({
@@ -73,7 +83,7 @@ window.addEventListener('load',function(e) {
         this.destroy();
       } else if(this.p.seconds < 1) {
         this.set({ "fill-opacity": this.p.seconds });
-      }
+      } 
     }
   });
 
@@ -116,9 +126,10 @@ window.addEventListener('load',function(e) {
         targetCount--;
         this.destroy();
         if(targetCount == 0) { Q.stageScene('level'); }
+        };
       }
     }
-  });
+  )
 
   Q.scene('level',new Q.Scene(function(stage) {
 
@@ -137,7 +148,6 @@ window.addEventListener('load',function(e) {
       type:'static',
       shape: 'polygon'
     }));
-
 
 	// Drawing the first target area
     stage.insert(new Q.Sprite({ w: 50, h:50, x: 300, y: 150 }));
