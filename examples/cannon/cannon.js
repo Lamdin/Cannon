@@ -50,8 +50,8 @@ window.addEventListener('load',function(e) {
     S: 'S'
   };
 
-  window.addEventListener("keydown",Q => {
-    if (Q.isComposing || event.keyCode == 88) {
+  window.addEventListener("keydown",event => {
+    if (event.isComposing || event.keyCode == 88) {
       Q.stageScene('level');
       this.console.log('it worked');
     }
