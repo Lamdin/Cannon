@@ -121,6 +121,7 @@ window.addEventListener('load',function(e) {
   });
 
   Q.scene('level',new Q.Scene(function(stage) {
+
     targetCount = 0;
     stage.add("world");
     stage.insert(new Q.Sprite({ 
@@ -137,7 +138,6 @@ window.addEventListener('load',function(e) {
       shape: 'polygon'
     }));
 
-    if (Q.input.on('action')) { Q.stageScene('level'); }; 
 
 	// Drawing the first target area
     stage.insert(new Q.Sprite({ w: 50, h:50, x: 300, y: 150 }));
@@ -159,7 +159,6 @@ window.addEventListener('load',function(e) {
     stage.cannon = stage.insert(new Q.Cannon());
     stage.viewport(600,400);
     stage.centerOn(400,150);
-      
   }));
   	Q.stageScene("level");
   	var cannonMove=function(e) {
@@ -181,8 +180,8 @@ window.addEventListener('load',function(e) {
 	var canonFire=function(e) {
 		Q.stage(0).cannon.fire();
    		e.preventDefault();
-	}
+  }
 	Q._each(["touchend","mouseup"],function(evt) {
 		Q.wrapper.addEventListener(evt,canonFire);
-	});
+  });
 });
