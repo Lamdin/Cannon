@@ -50,11 +50,10 @@ window.addEventListener('load',function(e) {
     S: 'S'
   };
 
-  Q.wrapper.addEventListener("keydown", event => {
-    if (Q.input.isComposing || Q.KEY_NAMES === 88) {
-      return;
+  Q.wrapper.addEventListener("keydown",Q => {
+    if (Q.isComposing || event.keyCode == 88) {
+      Q.stageScene('level');
     }
-    Q.stageScene('level');
   });
   
 
